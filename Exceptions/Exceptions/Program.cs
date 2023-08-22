@@ -1,10 +1,18 @@
 ﻿using Exceptions;
 
+//exception occured in method4 but bubbles up to try catch in method2
 method1();
 
 void method1()
 {
-    method2();
+    try
+    {
+        method2();
+    }
+    catch
+    {
+        Console.WriteLine("Caught");
+    }
 }
 void method2()
 {
