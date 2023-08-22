@@ -29,8 +29,15 @@ namespace Banking_v1
 
             if (Balance < Amount)
 			{
-				Console.WriteLine("Insufficient funds!");
-				return false;
+				try
+				{
+                    throw new InsufficientFundsException("Insufficient funds!");
+                }
+				catch
+				{
+					Console.WriteLine("Insufficient funds!");
+                    return false;
+                }		
 			}
 
 			Balance -= Amount;
@@ -60,8 +67,19 @@ namespace Banking_v1
 			{
 				return true;
 			}
-            Console.WriteLine("Amount must be greater than zero!");
-			return false;
+
+            var ex = new NotPositiveException("Amount must be greater than zero!");
+            ex.Amount = Amount;
+
+            try
+			{
+				throw ex;
+            }
+			catch
+			{
+				Console.WriteLine($"{ex.Amount} is not greater than zero!");
+                return false;
+            }
         }
 
         public void Print()
