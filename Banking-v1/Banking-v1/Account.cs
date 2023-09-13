@@ -25,7 +25,7 @@ namespace Banking_v1
 		public bool Withdraw(decimal Amount)
 		{
             if (!AmountIsPositive(Amount))
-                return false;
+                throw new NotPositiveException();
 
             if (Balance < Amount)
 			{
